@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            background-image: url('https://th.bing.com/th/id/OIP.jZhQqVfOmVK90_3FWj90QQHaEo?w=270&h=180&c=7&r=0&o=5&dpr=1.4&pid=1.7');
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 350px;
+            background: #623064;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .account-info {
+            text-align: center;
+        }
+        .account-info img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .account-info p {
+            margin: 5px 0;
+        }
+        .platforms {
+            margin-top: 20px;
+        }
+        .platforms h4 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        .main {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .main h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .chart {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .chart img {
+            max-width: 60%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background: white;
+        }
+        .stats {
+            margin-bottom: 30px;
+        }
+        .stat-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .limit-input {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <div class="account-info">
+            <div class="account-info">
+    <img src="https://th.bing.com/th/id/OIP.WK4sDfcLLM5EBmN3uoaY6wAAAA?rs=1&pid=ImgDetMain" alt="User Icon">
+    <p><strong>Name:</strong> {{ user.username }}</p>
+    <p><strong>Mobile:</strong> {{ mobile }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+</div>
+
+        </div>
+        <div class="platforms">
+            <h4>Linked Platforms</h4>
+            <ul>
+                <li>Amazon</li>
+                <li>Flipkart</li>
+                <li>eBay</li>
+                <li>Myntra</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main">
+        <h1>Your Order Dashboard</h1>
+
+        <div class="stat-item">
+    <strong>Total Orders:</strong> {{ total_orders }}
+</div>
+<div class="stat-item">
+    <strong>Monthly Spending:</strong> ${{ monthly_spending }}
+</div>
+<div class="stat-item">
+    <strong>Yearly Spending:</strong> ${{ yearly_spending }}
+</div>
+
+
+        <div class="chart">
+            <h2>Monthly Spending (with Prediction)</h2>
+            <img src="{{ url_for('static', filename='charts/monthly_spending.png') }}" alt="Monthly Spending">
+        </div>
+
+        <div class="chart">
+            <h2>Spending by Category</h2>
+            <img src="{{ url_for('static', filename='charts/category_pie.png') }}" alt="Spending by Category">
+        </div>
+
+        <div class="limit-input">
+            <h3>Set Shopping Limit</h3>
+            <form method="POST" action="/set_limit">
+                <label for="max_spend">Enter Max Monthly Spend ($):</label>
+                <input type="number" name="max_spend" id="max_spend" required>
+                <button type="submit">Set Limit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
